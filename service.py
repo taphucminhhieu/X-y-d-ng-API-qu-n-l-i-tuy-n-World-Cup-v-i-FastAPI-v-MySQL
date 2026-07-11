@@ -50,16 +50,7 @@ def delete_item(db: Session, item_id: int):
 # tìm kiếm
 
 
-def search_group_name(db: Session, item_group_name: str):
+def search_group_name(db: Session, group_name: str):
     search = db.query(WorldCup).filter(
-        WorldCup.group_name == item_group_name).all()
+        WorldCup.group_name.ilike(f"%{group_name}%")).all()
     return search
-
-
-# def search_group_name(db: Session, item_group_name: str):
-#     # Dùng ilike để không phân biệt hoa thường
-#     # Dùng % ở cả 2 đầu để tìm từ khóa ở bất kỳ vị trí nào trong chuỗi
-#     search = db.query(WorldCup).filter(
-#         WorldCup.group_name.ilike(f"%{item_group_name}%")
-#     ).all()
-#     return search
